@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { captureEvent } from "@/lib/posthog";
 const Navbar = () => {
   return (
     <header>
@@ -16,7 +19,14 @@ const Navbar = () => {
             <Link href="#events">Events</Link>
           </li>
           <li>
-            <Link href="/">Create Event</Link>
+            <Link
+              href="/"
+              onClick={() =>
+                captureEvent("create_event_clicked", { source: "navbar" })
+              }
+            >
+              Create Event
+            </Link>
           </li>
         </ul>
       </nav>
